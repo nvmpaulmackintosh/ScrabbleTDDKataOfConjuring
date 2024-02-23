@@ -79,52 +79,52 @@ namespace Scrabble.Lib.Test
 
         #region Initial word is extended horizontally with suffix
         /*Scores value of all letter tiles (no new bonus squares used)*/
-        //public class ExtendingAWordHorizontallySuffix : WordsTest
-        //{
-        //    /*
-        //     Word 1 (H on centre) =
-        //       H I J K
-        //    8 |H|E| | |
-        //    9 | | | | |
-        //   10 | | | | |
-        //     * 
-        //     Word 2 =
-        //       H I J K
-        //    8 |H|E|A|D|
-        //    9 | | | | |
-        //   10 | | | | |
-        //     */
+        public class ExtendingAWordHorizontallySuffix : WordsTest
+        {
+            /*
+             Word 1 (H on centre) =
+               H I J K
+            8 |H|E| | |
+            9 | | | | |
+           10 | | | | |
+             * 
+             Word 2 =
+               H I J K
+            8 |H|E|A|D|
+            9 | | | | |
+           10 | | | | |
+             */
 
-        //    public ExtendingAWordHorizontallySuffix()
-        //    {
-        //        TilesToSelect = "HEABCDE" + "ADFGHIJ" + "ABCDE";
-        //    }
+            public ExtendingAWordHorizontallySuffix()
+            {
+                TilesToSelect = "HEABCDE" + "ADFGHIJ" + "ABCDE";
+            }
 
-        //    [SetUp]
-        //    public void CreateWordsAndScores()
-        //    {
-        //        PlayerNames = new[] { "Victoria" };
+            [SetUp]
+            public void CreateWordsAndScores()
+            {
+                PlayerNames = new[] { "Victoria" };
 
-        //        Words = new[] {
-        //            new[] {
-        //                TilePoint.Create('H', "H8"),
-        //                TilePoint.Create('E', "I8")
-        //            },
-        //            new[] {
-        //                TilePoint.Create('A', "J8"),
-        //                TilePoint.Create('D', "K8"),
-        //            }
-        //        };
+                Words = new[] {
+                    new[] {
+                        TilePoint.Create('H', "H8"),
+                        TilePoint.Create('E', "I8")
+                    },
+                    new[] {
+                        TilePoint.Create('A', "J8"),
+                        TilePoint.Create('D', "K8"),
+                    }
+                };
 
-        //        ExpectedScores = new[] { 10, 8 };
-        //    }
+                ExpectedScores = new[] { 10, 8 };
+            }
 
-        //    [Test]
-        //    public void ThenScoresExtendedWord()
-        //    {
-        //        LayTheWords();
-        //    }
-        //}
+            [Test]
+            public void ThenScoresExtendedWord()
+            {
+                LayTheWords();
+            }
+        }
         #endregion
 
         #region Initial word is extended horizontally with prefix      
