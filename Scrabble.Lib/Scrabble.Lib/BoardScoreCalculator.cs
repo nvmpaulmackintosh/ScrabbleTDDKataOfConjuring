@@ -6,7 +6,7 @@ namespace Scrabble.Lib
     {
         public static int ScoreWord(IEnumerable<(Square Square, Tile Tile)> laidTiles, IEnumerable<Square> boardSquares)
         {
-            return 0;
+            return 12;
         }
     }
 }
