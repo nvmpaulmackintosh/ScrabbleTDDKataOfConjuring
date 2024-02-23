@@ -12,7 +12,8 @@ namespace Scrabble.Lib
             int wordFactor = 1;
 
             var extendedScore = 0;
-            extendedScore += CalculateHorizontalSuffixScore(laidTiles, boardSquares);
+            extendedScore += CalculateHorizontalExtendedScore(laidTiles, boardSquares, true);
+            extendedScore += CalculateHorizontalExtendedScore(laidTiles, boardSquares, false);
 
             foreach ((Square square, Tile tile) in laidTiles)
             {
@@ -24,21 +25,26 @@ namespace Scrabble.Lib
             return (score * wordFactor) + extendedScore;
         }
 
-        private static int CalculateHorizontalSuffixScore(IEnumerable<(Square Square, Tile Tile)> laidTiles, IEnumerable<Square> boardSquares)
+        private static int CalculateHorizontalExtendedScore(IEnumerable<(Square Square, Tile Tile)> laidTiles, IEnumerable<Square> boardSquares, bool isPrefix)
         {
             int score = 0;
-            var leftmostSquare = laidTiles.Select(x => x.Square).OrderBy(x => x.Point.X).First();
+            int directionFactor = 1;
+            if (isPrefix)
+            {
+                directionFactor *= -1;
+            }
+            var rightmostSquare = laidTiles.Select(x => x.Square).OrderBy(x => x.Point.X * directionFactor).Last();
 
-            while (boardSquares.Any(x => x.Point.X == (leftmostSquare.Point.X-1)))
+            while (boardSquares.Any(x => x.Point.X == rightmostSquare.Point.X + directionFactor))
             {
                 var square = boardSquares
                     .Where(x => x.State is Occupied)
-                    .Where(x => x.Point.Y == leftmostSquare.Point.Y)
-                    .SingleOrDefault(x => x.Point.X == leftmostSquare.Point.X - 1);
+                    .Where(x => x.Point.Y == rightmostSquare.Point.Y)
+                    .SingleOrDefault(x => x.Point.X == rightmostSquare.Point.X + directionFactor);
 
                 if (square == null) break;
                 var occupied = square.State as Occupied;
-                leftmostSquare = square;
+                rightmostSquare = square;
 
                 score += occupied.Tile.Value;
             }
